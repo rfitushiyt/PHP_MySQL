@@ -68,4 +68,47 @@
         echo"Dite e pavlefshme";
     }
 
+    echo "</br>";
+    echo "</br>";
+
+
+    //Loops (while, do while, for, foreach)
+
+    $x = 1;
+    while($x<=5){
+        echo"The number is : $x <br>";
+        $x++;
+    }
+
+    echo "</br>";
+
+    $y=1;
+    do{
+        echo"The number is : $y <br>";
+        $y++;
+    }while($y >=5);
+    
+    echo "</br>";
+
+    for($i=0; $i<=10; $i++){
+        echo"Numri eshte $i <br>";
+    }
+
+    echo "</br>";
+
+    //foreach vetem te arrays
+
+    $cars = ["BMW", "Ferrari", "Lamborghini", "Ford", "Qiantu K50"];
+
+    foreach($cars as $value){
+        echo"The best car firm is : $value <br>";
+    };
+
+    echo "</br>";
+
+      
+$age = array("John" => 18, "Michael" => 20, "Joe" => 13);
+ foreach($age as $key => $value){
+    echo "$key = $value  <br>";
+ }
 ?>
