@@ -78,4 +78,56 @@
     }
     callCounter(); //count=1
     callCounter();
+
+    echo "<br>";
+    echo "<br>";
+    echo "<br>";
+
+    //Arrays
+
+    // $sports = array("Football", "Basketball", "Tennis", "Voleyball"); menyra e pare 
+    $sports = ["Football", "Basketball", "Tennis", "Voleyball", "Handball", "Kayaking"];
+
+    echo $sports[0];
+    echo "<br>";
+    echo end($sports);
+
+    echo "<br>";
+    echo "<br>";
+
+    echo count($sports);
+    echo "<br>";
+    echo "<br>";
+
+    array_push($sports, "Skiing");
+    array_unshift($sports, "Golf");
+
+    echo count($sports);
+    echo "<br>";
+    echo "<br>";
+
+    for($i=0; $i < 8; $i++){
+        echo $sports[$i]. "</br>";
+    }
+
+    array_shift($sports); // - removes the first item
+    array_pop($sports);  //- removes the last item
+
+    echo "<br>";
+    echo "<br>";
+
+    for($i=0; $i < 6; $i++){
+        echo $sports[$i]. "</br>";
+    }
+
+    echo "<br>";
+    var_dump($sports);
+
+    echo "<br>";
+    $output1 = array_slice($sports,2);
+    echo "<br>";
+    $output2 = array_slice($sports,0,3);
+    var_dump($output1);
+    echo "<br>";
+    var_dump($output2);
 ?>
