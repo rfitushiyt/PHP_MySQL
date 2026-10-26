@@ -6,12 +6,17 @@
     <title>Document</title>
 </head>
 <style>
-    table,td,th{
-        border: 1px, solid, red;
-        border-collapse: collapse; 
-    }   
-    td , th{
-        padding: 10px, 20px;
+   table, td, th {
+        border: 1px solid #999;
+        border-collapse: collapse;
+    }
+
+    td, th {
+        padding: 10px 20px;
+    }
+
+    th {
+        background-color: #f2f2f2;
     }
 </style>
 <body>
@@ -38,6 +43,7 @@
                 <td><?= $user['name'] ?></td>
                 <td><?= $user['username'] ?></td>
                 <td><?= $user['email'] ?></td>
+                <td><?= "<a href='delete.php?id=$user[id]'> Delete</a>| <a href='edit.php?id=$user[id]'> Update </a>" ?></td>
             </tr>
 
             <?php }
