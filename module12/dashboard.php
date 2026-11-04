@@ -187,7 +187,7 @@ $users = $getUsers->fetchAll();
 
             <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
 
-                <a href="index1.php" class="btn btn-add">
+                <a href="index.php" class="btn btn-add">
                     + Add Users
                 </a>
 
