@@ -14,7 +14,7 @@
 
     <style>
         body {
-            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -33,7 +33,7 @@
         }
 
         .card-header-gradient {
-            background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            background: linear-gradient(135deg, #2563eb 0%, #60a5fa 100%);
             border-radius: 20px 20px 0 0 !important;
             border-bottom: none;
         }
@@ -42,13 +42,13 @@
             border-radius: 10px;
             padding: 14px 16px 14px 48px;
             font-size: 1.05rem;
-            border: 1px solid #fbcfe8;
+            border: 1px solid #bfdbfe;
             transition: all 0.2s ease-in-out;
         }
 
         .form-control:focus, .form-select:focus {
-            border-color: #ec4899;
-            box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.15);
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
         }
 
         .input-group-custom {
@@ -60,23 +60,23 @@
             left: 18px;
             top: 50%;
             transform: translateY(-50%);
-            color: #f472b6;
+            color: #3b82f6;
             z-index: 10;
             font-size: 1.25rem;
         }
 
         .form-check-input:checked {
-            background-color: #ec4899;
-            border-color: #ec4899;
+            background-color: #2563eb;
+            border-color: #2563eb;
         }
 
         .form-check-input:focus {
-            border-color: #ec4899;
-            box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.15);
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
         }
 
         .btn-custom {
-            background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            background: linear-gradient(135deg, #2563eb 0%, #60a5fa 100%);
             border: none;
             border-radius: 10px;
             padding: 14px;
@@ -90,7 +90,7 @@
         .btn-custom:hover {
             opacity: 0.92;
             color: white;
-            box-shadow: 0 6px 16px rgba(236, 72, 153, 0.35);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
         }
 
         .btn-custom:active {
@@ -99,13 +99,13 @@
 
         .form-label {
             font-weight: 600;
-            color: #4c1d95;
+            color: #1e3a8a;
             font-size: 0.95rem;
             margin-bottom: 8px;
         }
 
         .text-pink-muted {
-            color: #db2777;
+            color: #3b82f6;
             font-size: 0.85rem;
         }
     </style>
@@ -121,10 +121,10 @@
 
             <div class="card-header card-header-gradient text-white text-center py-5">
 
-                <h2 class="mb-2 fw-bold">Create Account</h2>
+                <h2 class="mb-2 fw-bold">Sign In</h2>
 
                 <p class="mb-0 text-white-50 fs-5">
-                    Join our beautiful community today!
+                    Please sign in your account to see more!
                 </p>
 
             </div>
@@ -136,8 +136,8 @@
                     <!-- Full Name -->
                     <div class="mb-4">
 
-                        <label for="fullName" class="form-label">
-                            Full Name
+                        <label for="name" class="form-label">
+                             Name
                         </label>
 
                         <div class="input-group-custom">
@@ -147,9 +147,31 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                id="fullName"
-                                name="fullname"
-                                placeholder="John Doe"
+                                id="name"
+                                name="name"
+                                placeholder="Jane"
+                                required
+                            >
+
+                        </div>
+                    </div>
+
+                     <div class="mb-4">
+
+                        <label for="surname" class="form-label">
+                             Surname
+                        </label>
+
+                        <div class="input-group-custom">
+
+                            <i class="bi bi-person-heart"></i>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="surname"
+                                name="surname"
+                                placeholder="Doe"
                                 required
                             >
 
@@ -178,14 +200,6 @@
 
                         </div>
 
-                        <div class="form-text mt-2 text-pink-muted">
-
-                            <i class="bi bi-heart-lock-fill"></i>
-                            We'll never share your email with anyone else.
-
-                        </div>
-                    </div>
-
                     <!-- Password -->
                     <div class="mb-4">
 
@@ -208,59 +222,6 @@
                             >
 
                         </div>
-                    </div>
-
-                    <!-- City -->
-                    <div class="mb-4">
-
-                        <label for="city" class="form-label">
-                            City
-                        </label>
-
-                        <div class="input-group-custom">
-
-                            <i class="bi bi-geo-alt-fill"></i>
-
-                            <select
-                                class="form-select"
-                                id="city"
-                                name="city"
-                                required
-                            >
-
-                                <option value="" selected disabled>
-                                    Select your city...
-                                </option>
-
-                                <option value="pristina">Pristina</option>
-                                <option value="tirana">Tirana</option>
-                                <option value="prizren">Prizren</option>
-                                <option value="shkoder">Shkodër</option>
-
-                            </select>
-
-                        </div>
-                    </div>
-
-                    <!-- Remember Me -->
-                    <div class="mb-4 form-check d-flex align-items-center">
-
-                        <input
-                            type="checkbox"
-                            class="form-check-input mt-0 me-2"
-                            id="rememberMe"
-                            name="rememberMe"
-                            value="1"
-                            style="width: 1.2rem; height: 1.2rem;"
-                        >
-
-                        <label
-                            class="form-check-label text-secondary fs-6"
-                            for="rememberMe"
-                        >
-                            Remember me on this device
-                        </label>
-
                     </div>
 
                     <!-- Submit -->
@@ -288,4 +249,3 @@
 
 </body>
 </html>
-

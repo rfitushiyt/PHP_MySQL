@@ -3,91 +3,26 @@
 
 include_once("config.php");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['submit'])) {
 
-    $fullname = trim($_POST['fullname'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
-    $city = $_POST['city'] ?? '';
+    $name = $_POST['name'];
+    $surname = $_POST['surname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-    $remember = isset($_POST['rememberMe']) ? 1 : 0;
+    $sql = "INSERT INTO users (name, surname, email, password)
+            VALUES (:name, :surname, :email, :password)";
 
-    // Kontrollimi i fushave
-    if (
-        empty($fullname) ||
-        empty($email) ||
-        empty($password) ||
-        empty($city)
-    ) {
-        die("Please fill in all fields!");
-    }
+    $sqlQuery = $conn->prepare($sql);
 
-    // Kontrollimi i email
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        die("Invalid email address!");
-    }
+    $sqlQuery->bindParam(':name', $name);
+    $sqlQuery->bindParam(':surname', $surname);
+    $sqlQuery->bindParam(':email', $email);
+    $sqlQuery->bindParam(':password', $password);
 
-    // Kontrollimi i password
-    if (strlen($password) < 8) {
-        die("Password must contain at least 8 characters!");
-    }
+    $sqlQuery->execute();
 
-    // Enkriptimi i password
-    $hashedPassword = password_hash(
-        $password,
-        PASSWORD_DEFAULT
-    );
-
-    try {
-
-        $sql = "INSERT INTO user
-        (fullname, email, password, city, remember_me)
-        VALUES
-        (:fullname, :email, :password, :city, :remember)";
-
-        $stmt = $conn->prepare($sql);
-
-        $stmt->execute([
-            ':fullname' => $fullname,
-            ':email' => $email,
-            ':password' => $hashedPassword,
-            ':city' => $city,
-            ':remember' => $remember
-        ]);
-
-        echo "
-        <div style='
-            text-align:center;
-            margin-top:100px;
-            font-family:Arial;
-        '>
-            <h2 style='color:green;'>
-                Registration Successful!
-            </h2>
-
-            <p>Your account has been created successfully.</p>
-
-            <a href='index.php'>Go Back</a>
-        </div>
-        ";
-
-    } catch (PDOException $e) {
-
-        if ($e->getCode() == 23000) {
-
-            echo "This email is already registered!";
-
-        } else {
-
-            echo "Something went wrong!";
-
-        }
-
-    }
-
-} else {
-
-    header("Location: index.php");
+    header("Location: dashboard.php");
     exit();
 
 }
