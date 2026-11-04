@@ -88,6 +88,32 @@
             color: white;
         }
 
+        .btn-update {
+            background: #dc6b75;
+            color: white;
+            border-radius: 7px;
+            padding: 7px 15px;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-delete:hover {
+            background: #bd4652;
+            color: white;
+        }
+
+        .footer-text {
+            color: #8ba6ba;
+            text-align: center;
+            margin-top: 25px;
+            font-size: 13px;
+        }
+
+         .btn-signin:hover {
+            background: #648eae;
+            color: white;
+        }
+
         .btn-delete {
             background: #dc6b75;
             color: white;
