@@ -1,38 +1,35 @@
-<?php	
 
-//Including config.php file for connection with database 
-	include_once('config.php');
+<?php
 
-//If the button Add Movie in movies.php is pressed, we will get datas that users added into the form, and insert them into database :
-	if(isset($_POST['submit']))
-	{
+// Including config.php file for database connection
+include_once('config.php');
 
-		$movie_name = $_POST['movie_name'];
-		$movie_desc = $_POST['movie_desc'];
-		$movie_quality = $_POST['movie_quality'];
-		$movie_rating = $_POST['movie_rating'];
-		$movie_image = $_POST['movie_image'];
-	
+// If the Add Movie button in movies.php is pressed
+if (isset($_POST['submit'])) {
 
-		$sql = "INSERT INTO movies(movie_name, movie_desc, movie_quality, movie_rating, movie_image) VALUES (:movie_name, :movie_desc, :movie_quality, :movie_rating, :movie_image)";
+    $movie_name = trim($_POST['movie_name']);
+    $movie_desc = trim($_POST['movie_desc']);
+    $movie_quality = trim($_POST['movie_quality']);
+    $movie_rating = trim($_POST['movie_rating']);
+    $movie_image = trim($_POST['movie_image']);
 
-		$insertMovie = $conn->prepare($sql);
-			
+    $sql = "INSERT INTO movies
+            (movie_name, movie_desc, movie_quality, movie_rating, movie_image)
+            VALUES
+            (:movie_name, :movie_desc, :movie_quality, :movie_rating, :movie_image)";
 
-		$insertMovie->bindParam(':movie_name', $movie_name);
-		$insertMovie->bindParam(':movie_desc', $movie_desc);
-		$insertMovie->bindParam(':movie_quality', $movie_quality);
-		$insertMovie->bindParam(':movie_rating', $movie_rating);
-		$insertMovie->bindParam(':movie_image', $movie_image);
+    $insertMovie = $conn->prepare($sql);
 
-		$insertMovie->execute();
+    $insertMovie->bindParam(':movie_name', $movie_name);
+    $insertMovie->bindParam(':movie_desc', $movie_desc);
+    $insertMovie->bindParam(':movie_quality', $movie_quality);
+    $insertMovie->bindParam(':movie_rating', $movie_rating);
+    $insertMovie->bindParam(':movie_image', $movie_image);
 
-		header("Location: movies.php");
+    $insertMovie->execute();
 
-
-	}
-
-
-
+    header("Location: movies.php");
+    exit;
+}
 
 ?>
