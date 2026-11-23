@@ -1,0 +1,762 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works | SkillSwap</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #080D20;
+            --secondary: #0B1F3B;
+            --card: #111C38;
+            --blue: #3457D5;
+            --electric: #6385FF;
+            --purple: #7856FF;
+            --white: #FFFFFF;
+            --muted: #A5B1D0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar {
+            background: rgba(8, 13, 32, 0.96);
+            border-bottom: 1px solid rgba(99, 133, 255, 0.15);
+            padding: 18px 0;
+        }
+
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 23px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .navbar-brand span {
+            color: var(--electric);
+        }
+
+        .nav-link {
+            color: var(--muted);
+            font-size: 13px;
+            margin: 0 8px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--electric);
+        }
+
+        .nav-btn,
+        .main-btn {
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 11px 21px;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover,
+        .main-btn:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(99, 133, 255, 0.25);
+        }
+
+        .hero {
+            padding: 100px 0 90px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 30%, rgba(120, 86, 255, 0.18), transparent 50%);
+        }
+
+        .hero-label,
+        .section-label {
+            color: var(--electric);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(30px, 5vw, 48px);
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .hero h1 span,
+        .section-title span {
+            color: var(--electric);
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.9;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(23px, 3vw, 31px);
+            font-weight: 700;
+            margin: 15px 0;
+        }
+
+        .section-description {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .step-card {
+            background: var(--card);
+            border: 1px solid rgba(99, 133, 255, 0.15);
+            border-radius: 17px;
+            padding: 30px;
+            height: 100%;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--electric);
+            box-shadow: 0 12px 30px rgba(52, 87, 213, 0.12);
+        }
+
+        .step-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 38px;
+            font-weight: 700;
+            color: var(--electric);
+            margin-bottom: 20px;
+        }
+
+        .step-icon {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(99, 133, 255, 0.14);
+            border-radius: 15px;
+            font-size: 26px;
+            margin-bottom: 22px;
+        }
+
+        .step-card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 13px;
+        }
+
+        .step-card p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        .exchange-section {
+            background: var(--secondary);
+        }
+
+        .exchange-card {
+            background: var(--card);
+            border: 1px solid rgba(99, 133, 255, 0.16);
+            border-radius: 18px;
+            padding: 30px;
+            height: 100%;
+        }
+
+        .person-box {
+            background: rgba(8, 13, 32, 0.75);
+            border: 1px solid rgba(99, 133, 255, 0.16);
+            border-radius: 13px;
+            padding: 22px;
+            text-align: center;
+            height: 100%;
+        }
+
+        .person-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .person-box h5 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .person-box p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: rgba(99, 133, 255, 0.14);
+            color: var(--electric);
+            border-radius: 7px;
+            padding: 6px 11px;
+            font-size: 11px;
+        }
+
+        .exchange-icon {
+            font-size: 35px;
+            color: var(--electric);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .credit-card {
+            background: linear-gradient(135deg, rgba(52, 87, 213, 0.22), rgba(120, 86, 255, 0.18));
+            border: 1px solid rgba(99, 133, 255, 0.2);
+            border-radius: 18px;
+            padding: 35px;
+            height: 100%;
+        }
+
+        .credit-icon {
+            font-size: 38px;
+            margin-bottom: 18px;
+        }
+
+        .credit-card h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .credit-card p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .credit-example {
+            background: rgba(8, 13, 32, 0.7);
+            border-radius: 12px;
+            padding: 17px;
+            margin-top: 20px;
+        }
+
+        .credit-example span {
+            color: #7CFFB2;
+            font-weight: 600;
+        }
+
+        .benefit-card {
+            background: var(--card);
+            border: 1px solid rgba(99, 133, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            height: 100%;
+        }
+
+        .benefit-card div {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .benefit-card h5 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .benefit-card p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .faq-item {
+            background: var(--card);
+            border: 1px solid rgba(99, 133, 255, 0.15);
+            border-radius: 12px;
+            margin-bottom: 13px;
+            overflow: hidden;
+        }
+
+        .accordion-button {
+            background: var(--card);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 19px 22px;
+            box-shadow: none;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: var(--card);
+            color: var(--electric);
+            box-shadow: none;
+        }
+
+        .accordion-button::after {
+            filter: brightness(0) invert(1);
+        }
+
+        .accordion-body {
+            background: var(--card);
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.9;
+            padding: 0 22px 20px;
+        }
+
+        .accordion-item {
+            background: var(--card);
+            border: none;
+        }
+
+        .cta {
+            padding: 75px 20px;
+            text-align: center;
+            background: linear-gradient(120deg, rgba(52, 87, 213, 0.22), rgba(120, 86, 255, 0.2));
+            border: 1px solid rgba(99, 133, 255, 0.2);
+            border-radius: 22px;
+        }
+
+        .cta h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(22px, 4vw, 32px);
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        footer {
+            background: #060A18;
+            border-top: 1px solid rgba(99, 133, 255, 0.13);
+            padding: 30px 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        footer a {
+            color: var(--muted);
+            text-decoration: none;
+            margin-left: 18px;
+        }
+
+        footer a:hover {
+            color: var(--electric);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 70px 0;
+            }
+
+            .section {
+                padding: 55px 0;
+            }
+
+            .navbar .nav-link {
+                margin: 5px 0;
+            }
+
+            .exchange-icon {
+                padding: 15px 0;
+            }
+
+            footer a {
+                margin: 0 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="main.html">SKILL<span>SWAP</span></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="main.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                <li class="nav-item"><a class="nav-link" href="howItWorks.html">How It Works</a></li>
+                <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+            </ul>
+
+            <a href="login.php" class="btn nav-btn">Get Started</a>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="container">
+        <span class="hero-label">Simple. Smart. Collaborative.</span>
+        <h1>How Does <span>SkillSwap</span> Work?</h1>
+        <p>
+            Learning something new doesn't have to be complicated.
+            SkillSwap makes it easy to exchange knowledge, connect with people
+            and develop new abilities without traditional payments.
+        </p>
+        <a href="register.php" class="btn main-btn mt-4">Start Your Journey</a>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-label">Four Simple Steps</span>
+            <h2 class="section-title">From Skills to <span>New Opportunities</span></h2>
+            <p class="section-description">
+                Follow these steps to start sharing your knowledge with the community.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <div class="step-icon">👤</div>
+                    <h4>Create Your Account</h4>
+                    <p>
+                        Register on SkillSwap and create your personal profile.
+                        Introduce yourself and become part of the community.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <div class="step-icon">🧠</div>
+                    <h4>Add Your Skills</h4>
+                    <p>
+                        Select the skills you can teach and the skills you
+                        would like to learn from other members.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <div class="step-icon">🤝</div>
+                    <h4>Find Your Match</h4>
+                    <p>
+                        Discover users with complementary skills and connect
+                        with people who share your learning interests.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="step-card">
+                    <div class="step-number">04</div>
+                    <div class="step-icon">🚀</div>
+                    <h4>Exchange Knowledge</h4>
+                    <p>
+                        Schedule a session, teach what you know, learn something
+                        new and earn credits through your contribution.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section exchange-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-label">A Real Example</span>
+            <h2 class="section-title">How a Skill <span>Exchange Happens</span></h2>
+            <p class="section-description">
+                Two people can help each other grow by sharing different abilities.
+            </p>
+        </div>
+
+        <div class="exchange-card">
+            <div class="row align-items-center g-3">
+                <div class="col-md-5">
+                    <div class="person-box">
+                        <div class="person-icon">👨‍💻</div>
+                        <h5>Alex</h5>
+                        <p>Web Developer</p>
+                        <span class="skill-tag">Can Teach: PHP</span>
+                        <p class="mt-3 mb-2">Wants to learn:</p>
+                        <span class="skill-tag">Photoshop</span>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="exchange-icon">⇄</div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="person-box">
+                        <div class="person-icon">🎨</div>
+                        <h5>Jordan</h5>
+                        <p>Graphic Designer</p>
+                        <span class="skill-tag">Can Teach: Photoshop</span>
+                        <p class="mt-3 mb-2">Wants to learn:</p>
+                        <span class="skill-tag">PHP</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <p class="section-description mb-0">
+                    Alex teaches PHP to Jordan, while Jordan teaches Photoshop to Alex.
+                    Both gain new knowledge through the exchange.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <span class="section-label">How Credits Work</span>
+                <h2 class="section-title">Knowledge Is Your <span>Currency</span></h2>
+                <p class="section-description">
+                    SkillSwap uses a credit-based system to make knowledge
+                    exchange fair and rewarding. Instead of paying money,
+                    members earn credits by teaching and use them to learn
+                    from other members.
+                </p>
+
+                <div class="credit-example">
+                    <p class="mb-2">Example of a teaching session</p>
+                    <span>+20 Credits</span>
+                    <p class="section-description mb-0 mt-2">
+                        A member earns credits after successfully completing
+                        a teaching session.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="credit-card">
+                    <div class="credit-icon">💎</div>
+                    <h4>Give Knowledge. Earn Credits.</h4>
+                    <p>
+                        Every completed exchange can contribute to your credit
+                        balance. You can then use your available credits to
+                        participate in learning sessions with other members.
+                    </p>
+                    <p class="mb-0">
+                        The goal is simple: everyone gets the opportunity
+                        to teach, learn and grow.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section exchange-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-label">Why SkillSwap?</span>
+            <h2 class="section-title">More Than Just <span>Learning</span></h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="benefit-card">
+                    <div>🌍</div>
+                    <h5>Accessible Learning</h5>
+                    <p>Discover learning opportunities through knowledge exchange instead of traditional payments.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="benefit-card">
+                    <div>🤝</div>
+                    <h5>New Connections</h5>
+                    <p>Meet people with different experiences, interests and abilities.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="benefit-card">
+                    <div>📈</div>
+                    <h5>Personal Growth</h5>
+                    <p>Improve your existing abilities and discover new areas of interest.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="benefit-card">
+                    <div>⭐</div>
+                    <h5>Build Reputation</h5>
+                    <p>Receive feedback and build trust through completed skill exchanges.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-label">Frequently Asked Questions</span>
+            <h2 class="section-title">Things You Might <span>Wonder</span></h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="accordion" id="faqAccordion">
+
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne">
+                                Is SkillSwap free to use?
+                            </button>
+                        </h2>
+                        <div id="faqOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                SkillSwap is designed around exchanging knowledge instead of traditional payments.
+                                Members use credits to participate in learning sessions.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo">
+                                What skills can I teach or learn?
+                            </button>
+                        </h2>
+                        <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                You can explore programming, graphic design, languages, photography,
+                                marketing and many other skills available on the platform.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree">
+                                How do I find someone to learn from?
+                            </button>
+                        </h2>
+                        <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Add the skills you want to learn to your profile.
+                                SkillSwap can help you discover members who offer those skills.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqFour">
+                                How do I earn credits?
+                            </button>
+                        </h2>
+                        <div id="faqFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                You earn credits by sharing your knowledge and completing
+                                teaching sessions according to the platform's credit rules.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqFive">
+                                Can I change my skills later?
+                            </button>
+                        </h2>
+                        <div id="faqFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes. You can update your profile and change the skills
+                                you offer or want to learn.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="cta">
+            <h2>Ready to Share What You Know?</h2>
+            <p>Your next learning opportunity is just one exchange away.</p>
+            <a href="register.php" class="btn main-btn">Join SkillSwap Today</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="row align-items-center gy-3">
+            <div class="col-md-6">
+                <span style="font-family: 'Orbitron', sans-serif; color: white; font-weight: 700;">
+                    SKILL<span style="color: #6385FF;">SWAP</span>
+                </span>
+                <p class="mt-2 mb-0">Share your skills. Grow together.</p>
+            </div>
+
+            <div class="col-md-6 text-md-end">
+                <a href="main.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="features.html">Features</a>
+                <a href="login.php">Login</a>
+            </div>
+        </div>
+
+        <hr style="border-color: rgba(165,177,208,0.15);">
+        <p class="mb-0 text-center">© 2026 SkillSwap. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

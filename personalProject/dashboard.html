@@ -1,0 +1,623 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSwap | Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #080D20;
+            --secondary: #0B1F3B;
+            --card: #111C38;
+            --blue: #3457D5;
+            --electric: #6385FF;
+            --purple: #7856FF;
+            --white: #FFFFFF;
+            --muted: #A5B1D0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(8, 13, 32, 0.95);
+            border-bottom: 1px solid rgba(99, 133, 255, 0.15);
+            padding: 18px 0;
+        }
+
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 23px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .navbar-brand span {
+            color: var(--electric);
+        }
+
+        .navbar .nav-link {
+            color: var(--muted);
+            font-size: 13px;
+            margin: 0 8px;
+            transition: 0.3s;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            color: var(--electric);
+        }
+
+        .profile-btn {
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            border: none;
+            border-radius: 10px;
+            padding: 9px 18px;
+            color: white;
+            font-size: 13px;
+        }
+
+        .dashboard {
+            padding: 45px 0;
+        }
+
+        .welcome h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(23px, 3vw, 32px);
+            font-weight: 700;
+        }
+
+        .welcome h1 span {
+            color: var(--electric);
+        }
+
+        .welcome p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .main-btn {
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 22px;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .main-btn:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(99, 133, 255, 0.25);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .section-title span {
+            color: var(--electric);
+        }
+
+        .stat-card,
+        .content-card {
+            background: var(--card);
+            border: 1px solid rgba(99, 133, 255, 0.13);
+            border-radius: 16px;
+            padding: 23px;
+            height: 100%;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover,
+        .content-card:hover {
+            border-color: rgba(99, 133, 255, 0.5);
+            transform: translateY(-4px);
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            background: rgba(99, 133, 255, 0.15);
+            margin-bottom: 18px;
+        }
+
+        .stat-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            color: var(--muted);
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .content-card h5 {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .content-card p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .match-card {
+            background: rgba(8, 13, 32, 0.65);
+            border: 1px solid rgba(99, 133, 255, 0.12);
+            border-radius: 13px;
+            padding: 17px;
+            height: 100%;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 17px;
+        }
+
+        .match-percent {
+            color: #7CFFB2;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: rgba(99, 133, 255, 0.13);
+            color: var(--electric);
+            padding: 6px 10px;
+            border-radius: 7px;
+            font-size: 11px;
+            margin: 3px 3px 3px 0;
+        }
+
+        .small-btn {
+            border: 1px solid var(--electric);
+            color: var(--electric);
+            background: transparent;
+            border-radius: 8px;
+            padding: 7px 13px;
+            font-size: 11px;
+            transition: 0.3s;
+        }
+
+        .small-btn:hover {
+            background: var(--electric);
+            color: white;
+        }
+
+        .skill-row,
+        .session-row,
+        .activity-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 13px 0;
+            border-bottom: 1px solid rgba(165, 177, 208, 0.1);
+        }
+
+        .skill-row:last-child,
+        .session-row:last-child,
+        .activity-row:last-child {
+            border-bottom: none;
+        }
+
+        .skill-row span,
+        .session-row span,
+        .activity-row span {
+            font-size: 12px;
+        }
+
+        .skill-row small,
+        .session-row small,
+        .activity-row small {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .credit-badge {
+            color: #7CFFB2;
+            background: rgba(124, 255, 178, 0.1);
+            padding: 5px 9px;
+            border-radius: 7px;
+            font-size: 11px;
+        }
+
+        .date-badge {
+            background: rgba(99, 133, 255, 0.13);
+            color: var(--electric);
+            border-radius: 9px;
+            padding: 9px;
+            text-align: center;
+            min-width: 48px;
+        }
+
+        .date-badge strong {
+            display: block;
+            font-size: 17px;
+        }
+
+        .date-badge small {
+            font-size: 10px;
+        }
+
+        .category-card {
+            background: rgba(8, 13, 32, 0.65);
+            border: 1px solid rgba(99, 133, 255, 0.12);
+            padding: 17px;
+            border-radius: 12px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .category-card:hover {
+            border-color: var(--electric);
+            background: rgba(52, 87, 213, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .category-card div {
+            font-size: 25px;
+            margin-bottom: 9px;
+        }
+
+        .category-card h6 {
+            font-size: 12px;
+            margin: 0;
+        }
+
+        footer {
+            border-top: 1px solid rgba(99, 133, 255, 0.13);
+            padding: 22px 0;
+            color: var(--muted);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                padding: 30px 0;
+            }
+
+            .welcome {
+                margin-bottom: 20px;
+            }
+
+            .navbar .nav-link {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="home.html">SKILL<span>SWAP</span></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav mx-auto">
+    <li class="nav-item"><a class="nav-link" href="main.html">Home</a></li>
+    <li class="nav-item"><a class="nav-link active" href="dashboard.html">Dashboard</a></li>
+    <li class="nav-item"><a class="nav-link" href="find-skills.html">Find Skills</a></li>
+    <li class="nav-item"><a class="nav-link" href="matches.html">My Matches</a></li>
+    <li class="nav-item"><a class="nav-link" href="messages.html">Messages</a></li>
+    <li class="nav-item"><a class="nav-link" href="calendar.html">Calendar</a></li>
+</ul>
+
+            <a href="profile.html" class="btn profile-btn">My Profile</a>
+        </div>
+    </div>
+</nav>
+
+<main class="dashboard">
+    <div class="container">
+
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-8 welcome">
+                <h1>Welcome back, <span>Alex!</span></h1>
+                <p class="mt-2">Ready to share your knowledge and learn something new today?</p>
+            </div>
+
+            <div class="col-lg-4 text-lg-end">
+                <a href="find-skills.html" class="btn main-btn">Find Your Next Match</a>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-6 col-lg-3">
+                <div class="stat-card">
+                    <div class="stat-icon">💎</div>
+                    <h3>120</h3>
+                    <p>Available Credits</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="stat-card">
+                    <div class="stat-icon">🎓</div>
+                    <h3>04</h3>
+                    <p>Skills Teaching</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <h3>06</h3>
+                    <p>Skills Learning</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <h3>12</h3>
+                    <p>Completed Exchanges</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-lg-8">
+                <div class="content-card">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="section-title mb-0">Your <span>Skill Matches</span></h4>
+                        <a href="matches.html" class="small-btn text-decoration-none">View All</a>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="match-card">
+                                <div class="d-flex align-items-center gap-3 mb-3">
+                                    <div class="avatar">JM</div>
+                                    <div>
+                                        <h5 class="mb-1">Jordan Miller</h5>
+                                        <p class="mb-0">Web Developer</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="match-percent">95% Match</span>
+                                </div>
+                                <p class="mb-1">Can teach you:</p>
+                                <span class="skill-tag">PHP</span>
+                                <p class="mt-3 mb-1">Wants to learn:</p>
+                                <span class="skill-tag">Photoshop</span>
+                                <div class="mt-3">
+                                    <a href="profile.html" class="small-btn text-decoration-none">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="match-card">
+                                <div class="d-flex align-items-center gap-3 mb-3">
+                                    <div class="avatar">SL</div>
+                                    <div>
+                                        <h5 class="mb-1">Sophia Lee</h5>
+                                        <p class="mb-0">Graphic Designer</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="match-percent">89% Match</span>
+                                </div>
+                                <p class="mb-1">Can teach you:</p>
+                                <span class="skill-tag">Photoshop</span>
+                                <p class="mt-3 mb-1">Wants to learn:</p>
+                                <span class="skill-tag">HTML & CSS</span>
+                                <div class="mt-3">
+                                    <a href="profile.html" class="small-btn text-decoration-none">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="content-card">
+                    <h4 class="section-title">My <span>Skills</span></h4>
+
+                    <div class="mb-3">
+                        <h5 class="mb-2">I Can Teach</h5>
+                        <div class="skill-row">
+                            <span>HTML & CSS</span>
+                            <span class="credit-badge">Teaching</span>
+                        </div>
+                        <div class="skill-row">
+                            <span>JavaScript</span>
+                            <span class="credit-badge">Teaching</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <h5 class="mb-2">I Want to Learn</h5>
+                        <div class="skill-row">
+                            <span>Photoshop</span>
+                            <span class="skill-tag">Learning</span>
+                        </div>
+                        <div class="skill-row">
+                            <span>Python</span>
+                            <span class="skill-tag">Learning</span>
+                        </div>
+                    </div>
+
+                    <a href="my-skills.html" class="btn main-btn w-100 mt-4">Manage My Skills</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-lg-6">
+                <div class="content-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="section-title mb-0">Upcoming <span>Sessions</span></h4>
+                        <a href="calendar.html" class="small-btn text-decoration-none">Calendar</a>
+                    </div>
+
+                    <div class="session-row">
+                        <div class="date-badge">
+                            <strong>25</strong>
+                            <small>NOV</small>
+                        </div>
+                        <div class="flex-grow-1">
+                            <span class="d-block">PHP Basics</span>
+                            <small>With Jordan Miller · 14:00</small>
+                        </div>
+                        <span class="credit-badge">Online</span>
+                    </div>
+
+                    <div class="session-row">
+                        <div class="date-badge">
+                            <strong>27</strong>
+                            <small>NOV</small>
+                        </div>
+                        <div class="flex-grow-1">
+                            <span class="d-block">Photoshop Introduction</span>
+                            <small>With Sophia Lee · 16:30</small>
+                        </div>
+                        <span class="credit-badge">Online</span>
+                    </div>
+
+                    <div class="session-row">
+                        <div class="date-badge">
+                            <strong>29</strong>
+                            <small>NOV</small>
+                        </div>
+                        <div class="flex-grow-1">
+                            <span class="d-block">JavaScript Practice</span>
+                            <small>With Alex Brown · 12:00</small>
+                        </div>
+                        <span class="credit-badge">Online</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="content-card">
+                    <h4 class="section-title">Recent <span>Activity</span></h4>
+
+                    <div class="activity-row">
+                        <div>
+                            <span class="d-block">Completed HTML & CSS session</span>
+                            <small>Yesterday</small>
+                        </div>
+                        <span class="credit-badge">+20 Credits</span>
+                    </div>
+
+                    <div class="activity-row">
+                        <div>
+                            <span class="d-block">Received a new 5-star rating</span>
+                            <small>2 days ago</small>
+                        </div>
+                        <span>⭐ 5.0</span>
+                    </div>
+
+                    <div class="activity-row">
+                        <div>
+                            <span class="d-block">Matched with Jordan Miller</span>
+                            <small>3 days ago</small>
+                        </div>
+                        <span class="skill-tag">New Match</span>
+                    </div>
+
+                    <div class="activity-row">
+                        <div>
+                            <span class="d-block">Completed JavaScript session</span>
+                            <small>5 days ago</small>
+                        </div>
+                        <span class="credit-badge">+15 Credits</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="section-title mb-0">Explore <span>Skills</span></h4>
+                <a href="find-skills.html" class="small-btn text-decoration-none">Explore All</a>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-6 col-md-3">
+                    <div class="category-card">
+                        <div>💻</div>
+                        <h6>Programming</h6>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-3">
+                    <div class="category-card">
+                        <div>🎨</div>
+                        <h6>Design</h6>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-3">
+                    <div class="category-card">
+                        <div>🌍</div>
+                        <h6>Languages</h6>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-3">
+                    <div class="category-card">
+                        <div>📈</div>
+                        <h6>Marketing</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        © 2026 SkillSwap. Share your skills. Grow together.
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
