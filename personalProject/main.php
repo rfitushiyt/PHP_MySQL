@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+$isLoggedIn = isset($_SESSION['id']);
+$username = $isLoggedIn ? $_SESSION['username'] : "";
+
+$initial = $isLoggedIn
+    ? strtoupper(mb_substr($username, 0, 1, "UTF-8"))
+    : "";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,6 +78,131 @@
 
         .nav-link:hover {
             color: var(--electric);
+        }
+
+        .nav-profile-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-dropdown {
+            position: relative;
+        }
+
+        .profile-button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--electric);
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 20px #6385FF40;
+            transition: 0.3s;
+        }
+
+        .profile-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px #6385FF80;
+        }
+
+        .profile-menu {
+            position: absolute;
+            top: 58px;
+            right: 0;
+            width: 235px;
+            padding: 12px;
+            background: #111C38;
+            border: 1px solid #6385FF50;
+            border-radius: 14px;
+            box-shadow: 0 18px 45px #00000070;
+            display: none;
+            z-index: 2000;
+        }
+
+        .profile-dropdown:hover .profile-menu,
+        .profile-dropdown:focus-within .profile-menu {
+            display: block;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 8px 5px 13px;
+        }
+
+        .profile-menu-initial {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: white;
+            font-weight: 700;
+        }
+
+        .profile-info strong {
+            display: block;
+            color: white;
+            font-size: 12px;
+            overflow-wrap: anywhere;
+        }
+
+        .profile-info small {
+            display: block;
+            color: var(--muted);
+            font-size: 10px;
+            margin-top: 3px;
+        }
+
+        .profile-divider {
+            height: 1px;
+            background: #26365B;
+            margin: 5px 0 8px;
+        }
+
+        .profile-menu a {
+            display: block;
+            padding: 10px;
+            border-radius: 8px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+
+        .profile-menu a:hover {
+            background: #3457D530;
+            color: white;
+        }
+
+        .profile-menu a.logout-link {
+            color: #FF8997;
+        }
+
+        .nav-auth-link {
+            color: var(--muted);
+            text-decoration: none;
+            border: 1px solid var(--electric);
+            padding: 10px 20px;
+            border-radius: 9px;
+            transition: 0.3s;
+        }
+
+        .nav-auth-link:hover {
+            color: white;
+            background: var(--blue);
         }
 
         .btn-main {
@@ -349,22 +484,51 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link" href="main.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="main.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
                 <li class="nav-item"><a class="nav-link" href="howItWorks.html">How It Works</a></li>
-                <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
                 </ul>
 
-                <div class="d-flex gap-2">
+                <div class="nav-profile-area">
 
-                    <a href="login.php" class="btn btn-outline-custom">
-                        Login
-                    </a>
+                    <?php if ($isLoggedIn): ?>
 
-                    <a href="register.php" class="btn btn-main">
-                        Get Started
-                    </a>
+                        <div class="profile-dropdown">
+
+                            <button class="profile-button" type="button" aria-label="Open profile menu">
+                                <?php echo htmlspecialchars($initial, ENT_QUOTES, 'UTF-8'); ?>
+                            </button>
+
+                            <div class="profile-menu">
+
+                                <div class="profile-info">
+                                    <span class="profile-menu-initial">
+                                        <?php echo htmlspecialchars($initial, ENT_QUOTES, 'UTF-8'); ?>
+                                    </span>
+
+                                    <div>
+                                        <strong><?php echo htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); ?></strong>
+                                        <small>SkillSwap Member</small>
+                                    </div>
+                                </div>
+
+                                <div class="profile-divider"></div>
+
+                                <a href="profile.php">My Profile</a>
+                                <a href="my-skills.html">My Skills</a>
+                                <a href="logout.php" class="logout-link">Log Out</a>
+
+                            </div>
+
+                        </div>
+
+                    <?php else: ?>
+
+                        <a href="login.php" class="nav-auth-link">Sign In</a>
+                        <a href="register.php" class="btn btn-main">Get Started</a>
+
+                    <?php endif; ?>
 
                 </div>
 
@@ -399,8 +563,8 @@
 
                     <div class="d-flex flex-wrap gap-3">
 
-                        <a href="register.php" class="btn btn-main">
-                            Start Swapping →
+                        <a href="<?php echo $isLoggedIn ? 'features.html' : 'register.php'; ?>" class="btn btn-main">
+                            <?php echo $isLoggedIn ? 'Explore Skills →' : 'Start Swapping →'; ?>
                         </a>
 
                         <a href="#about" class="btn btn-outline-custom">
@@ -542,8 +706,8 @@
 
                     </p>
 
-                    <a href="register.php" class="btn btn-main mt-3">
-                        Join Our Community →
+                    <a href="<?php echo $isLoggedIn ? 'features.html' : 'register.php'; ?>" class="btn btn-main mt-3">
+                        <?php echo $isLoggedIn ? 'Explore Features →' : 'Join Our Community →'; ?>
                     </a>
 
                 </div>
@@ -750,8 +914,8 @@
                     valuable to teach and something new to learn.
                 </p>
 
-                <a href="register.php" class="btn btn-main">
-                    Create Your Free Account →
+                <a href="<?php echo $isLoggedIn ? 'features.html' : 'register.php'; ?>" class="btn btn-main">
+                    <?php echo $isLoggedIn ? 'Explore SkillSwap →' : 'Create Your Free Account →'; ?>
                 </a>
 
             </div>
